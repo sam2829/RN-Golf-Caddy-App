@@ -66,6 +66,7 @@ export default function App() {
             tabBarStyle: { backgroundColor: Colors.colors.primaryGreen },
             tabBarActiveTintColor: Colors.colors.primaryGold,
             tabBarInactiveTintColor: Colors.colors.white,
+            contentStyle: { backgroundColor: Colors.colors.primaryGold },
           }}
         >
           <BottomTabs.Screen
