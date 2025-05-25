@@ -3,9 +3,11 @@ import Header from "../components/Header";
 import { Colors } from "../constants/styles";
 import FlagLogo from "../components/FlagLogo";
 
+// function to load home screen content
 function HomeScreen() {
   return (
     <View style={styles.container}>
+      {/* import header */}
       <Header>Welcome to the Abergavenny Golf Caddy!</Header>
       <View style={styles.textContainer}>
         <Text style={styles.text}>
@@ -28,6 +30,7 @@ function HomeScreen() {
 
 export default HomeScreen;
 
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

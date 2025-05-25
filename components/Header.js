@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Colors } from "../constants/styles";
 
+// function to create custom Header
 function Header({ children }) {
   return (
     <View style={styles.container}>
@@ -11,6 +12,7 @@ function Header({ children }) {
 
 export default Header;
 
+// styles
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",

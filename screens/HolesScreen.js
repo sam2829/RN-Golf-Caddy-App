@@ -1,25 +1,28 @@
-import { Button, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
+import { HOLES_DATA } from "../data/HolesData";
+import HoleItem from "../components/holesData/HoleItem";
+import { Colors } from "../constants/styles";
 
-function HolesScreen({ navigation }) {
+// function to create each hole item
+function RenderHolesData(itemData) {
+  return <HoleItem {...itemData.item} />;
+}
+
+// function to render Holes screen and flatlist
+function HolesScreen() {
   return (
-    <View style={styles.container}>
-      <View style={styles.button}>
-        <Button
-          title="Hole Details"
-          onPress={() => navigation.navigate("HoleDetailsScreen")}
-        />
-      </View>
-    </View>
+    <FlatList
+      data={HOLES_DATA}
+      renderItem={RenderHolesData}
+      keyExtractor={(item) => item.id}
+      style={styles.container}
+    />
   );
 }
 
 export default HolesScreen;
 
+// styles
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  button: {
-    marginTop: 50,
-  },
+  container: { backgroundColor: Colors.colors.lightGrey },
 });
