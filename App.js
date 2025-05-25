@@ -2,15 +2,58 @@ import { StatusBar } from "expo-status-bar";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./screens/HomeScreen";
 import HolesScreen from "./screens/HolesScreen";
 import ScorecardScreen from "./screens/ScorecardScreen";
 import GroupScreen from "./screens/GroupsScreen";
 import { Colors } from "./constants/styles";
+import HolesDetailScreen from "./screens/HolesDetailScreen";
+import { Text } from "react-native";
 
 const BottomTabs = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
+// function to display holes screens and details screen in stack
+function HolesOverview() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.colors.primaryGreen },
+        headerTintColor: Colors.colors.primaryGold,
+      }}
+    >
+      <Stack.Screen
+        name="HolesScreen"
+        component={HolesScreen}
+        options={{
+          headerTitle: () => (
+            <Text
+              style={{
+                color: Colors.colors.primaryGold,
+                fontSize: 20,
+                fontWeight: "500",
+                paddingVertical: 18.5,
+              }}
+            >
+              Holes
+            </Text>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="HoleDetailsScreen"
+        component={HolesDetailScreen}
+        options={{
+          title: " Hole Details",
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+// main app and bottom tabs setup
 export default function App() {
   return (
     <>
@@ -37,10 +80,11 @@ export default function App() {
             }}
           />
           <BottomTabs.Screen
-            name="HolesScreen"
-            component={HolesScreen}
+            name="HolesOverview"
+            component={HolesOverview}
             options={{
               title: "Holes",
+              headerShown: false,
               tabBarLabel: "Holes",
               tabBarIcon: ({ color, size }) => (
                 <Ionicons name="golf" size={size} color={color} />
