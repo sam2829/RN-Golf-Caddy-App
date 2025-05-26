@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { HOLES_DATA } from "../data/HolesData";
 import { Colors } from "../constants/styles";
 import Header from "../components/Header";
@@ -14,17 +14,25 @@ function HolesDetailScreen({ route }) {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* import Header */}
       <Header>Hole {selectedHoleDetails.holeNumber}</Header>
+      <View style={styles.holeStatsContainer}>
+        <Text style={styles.text}>Yards: {selectedHoleDetails.yards}</Text>
+        <Text style={styles.text}>Par: {selectedHoleDetails.par}</Text>
+      </View>
       {/* view for image */}
       <View style={styles.imageContainer}>
-        <Image source={selectedHoleDetails.image} style={styles.image} />
+        <Image
+          source={selectedHoleDetails.image}
+          style={styles.image}
+          accessibilityLabel={`Hole number ${selectedHoleDetails.holeNumber}`}
+        />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{selectedHoleDetails.description}</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -45,6 +53,18 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     borderRadius: 12,
+    borderColor: Colors.colors.primaryGold,
+    borderWidth: 2,
+    elevation: 8,
+    shadowColor: Colors.colors.lightGrey,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.8,
+  },
+  holeStatsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom: 20,
   },
   textContainer: {
     justifyContent: "center",
