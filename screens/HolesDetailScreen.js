@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { HOLES_DATA } from "../data/HolesData";
 import { Colors } from "../constants/styles";
-import Header from "../components/Header";
+import Header from "../components/UI/Header";
 
 // function to render the hole details screen
 function HolesDetailScreen({ route }) {

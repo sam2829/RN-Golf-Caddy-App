@@ -18,6 +18,7 @@ function ScorecardHeaders() {
 
 export default ScorecardHeaders;
 
+// styles
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",

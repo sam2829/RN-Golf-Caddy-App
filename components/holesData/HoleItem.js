@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../../constants/styles";
-import FlagLogo from "../FlagLogo";
+import FlagLogo from "../UI/FlagLogo";
 import { useNavigation } from "@react-navigation/native";
 
 // function to load the hole item for each hole on holes screen

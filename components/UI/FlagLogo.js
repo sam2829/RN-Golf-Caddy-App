@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../constants/styles";
+import { Colors } from "../../constants/styles";
 import { StyleSheet, View } from "react-native";
 
 // function to create custom logo

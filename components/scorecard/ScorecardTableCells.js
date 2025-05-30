@@ -2,7 +2,8 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import { Colors } from "../../constants/styles";
 import { HOLES_DATA } from "../../data/HolesData";
 
-function ScorecardTableCells() {
+// component to render scorecard tables cells
+function ScorecardTableCells({ playerNames, scores, onScoreChange }) {
   return (
     <>
       {/* map over scorecard table cells */}
@@ -17,18 +18,35 @@ function ScorecardTableCells() {
           <Text style={styles.scorecardCell}>{item.holeNumber}</Text>
           <Text style={styles.scorecardCell}>{item.par}</Text>
           <Text style={styles.scorecardCell}>{item.yards}</Text>
-          {/* map over text inputs for players score */}
-          {[0, 1, 2, 3].map((playerIndex) => (
-            <View
-              key={playerIndex}
-              style={[styles.scorecardCell, styles.scorecardInputContainer]}
-            >
-              <TextInput
-                keyboardType="number-pad"
-                style={styles.scorecardInput}
-              />
-            </View>
-          ))}
+          {/* map over players and check names have been entered */}
+          {["player1", "player2", "player3", "player4"].map((playerKey) => {
+            const isPlayerSet = playerNames[playerKey]?.trim().length > 0;
+            const scoreValue = scores[playerKey]?.[item.holeNumber] || "";
+
+            // return input for updating scores
+            return (
+              <View
+                key={playerKey}
+                style={[styles.scorecardCell, styles.scorecardInputContainer]}
+              >
+                <TextInput
+                  keyboardType="number-pad"
+                  style={[
+                    styles.scorecardInput,
+                    !isPlayerSet && styles.disabledInput,
+                  ]}
+                  value={scoreValue}
+                  onChangeText={(value) => {
+                    // Only allow whole numbers
+                    const cleanedValue = value.replace(/[^0-9]/g, "");
+                    onScoreChange(playerKey, item.holeNumber, cleanedValue);
+                  }}
+                  editable={isPlayerSet}
+                  maxLength={2}
+                />
+              </View>
+            );
+          })}
         </View>
       ))}
     </>
@@ -37,6 +55,7 @@ function ScorecardTableCells() {
 
 export default ScorecardTableCells;
 
+// styles
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: "row",
@@ -62,9 +81,12 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     borderBottomWidth: 1,
-    width: "80%",
+    width: "40%",
     textAlign: "center",
     fontSize: 14,
     fontWeight: "500",
+  },
+  disabledInput: {
+    borderBottomWidth: 0,
   },
 });

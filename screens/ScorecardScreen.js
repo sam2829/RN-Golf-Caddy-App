@@ -1,32 +1,91 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { Colors } from "../constants/styles";
 import ScorecardHeaders from "../components/scorecard/ScorecardHeaders";
 import ScorecardTableCells from "../components/scorecard/ScorecardTableCells";
 import ScorecardTotal from "../components/scorecard/ScorecardTotal";
-import PlayerName from "../components/scorecard/PlayerName";
+import ScorecardPlayerNames from "../components/scorecard/ScorecardPlayerNames";
+import { useState } from "react";
+import Button from "../components/UI/Button";
 
 // component to render scorecard screen
 function ScorecardScreen() {
+  // use state for player names
+  const [playerNames, setPlayerNames] = useState({
+    player1: "",
+    player2: "",
+    player3: "",
+    player4: "",
+  });
+
+  // state to keep track of scores
+  const [scores, setScores] = useState({
+    player1: {},
+    player2: {},
+    player3: {},
+    player4: {},
+  });
+
+  // function to handle name changes
+  const handleNameChange = (playerKey, newName) => {
+    setPlayerNames((prev) => ({
+      ...prev,
+      [playerKey]: newName,
+    }));
+  };
+
+  // function to update scores
+  const handleScoreChange = (playerKey, holeNumber, value) => {
+    setScores((prev) => ({
+      ...prev,
+      [playerKey]: {
+        ...prev[playerKey],
+        [holeNumber]: value,
+      },
+    }));
+  };
+
+  // function to handle confirm reset
+  const handleConfirmReset = () => {
+    Alert.alert(
+      "Reset Scorecard",
+      "Are you sure we want to clear all scores and player names?",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Yes", onPress: handleReset },
+      ]
+    );
+  };
+
+  // function to handle reset
+  const handleReset = () => {
+    setPlayerNames({});
+    setScores({});
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <View>
-        <View style={styles.playerNameContainer}>
-          <PlayerName title="Player 1" />
-          <PlayerName title="Player 2" />
-        </View>
-        <View style={styles.playerNameContainer}>
-          <PlayerName title="Player 3" />
-          <PlayerName title="Player 4" />
-        </View>
-      </View>
+      {/* import player names */}
+      <ScorecardPlayerNames
+        playerNames={playerNames}
+        onNameChange={handleNameChange}
+      />
       {/* header Row */}
       <View style={styles.scorecardContainer}>
         {/* import scorecard headers */}
         <ScorecardHeaders />
         {/* import scorecard table cells */}
-        <ScorecardTableCells />
+        <ScorecardTableCells
+          playerNames={playerNames}
+          scores={scores}
+          onScoreChange={handleScoreChange}
+        />
         {/* import total scores */}
-        <ScorecardTotal />
+        <ScorecardTotal playerNames={playerNames} scores={scores} />
+      </View>
+      {/* button container */}
+      <View style={styles.buttonContainer}>
+        {/* import button for reset */}
+        <Button onPress={handleConfirmReset}>Reset Scorecard</Button>
       </View>
     </ScrollView>
   );
@@ -34,15 +93,11 @@ function ScorecardScreen() {
 
 export default ScorecardScreen;
 
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.colors.lightGrey,
-  },
-  playerNameContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    alignItems: "center",
   },
   scorecardContainer: {
     borderRadius: 8,
@@ -55,5 +110,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     marginHorizontal: 10,
     marginVertical: 30,
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    marginBottom: 40,
   },
 });

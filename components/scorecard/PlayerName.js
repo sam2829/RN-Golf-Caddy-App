@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Colors } from "../../constants/styles";
 
-function PlayerName({ title }) {
+// component to render the player name texts
+function PlayerName({ title, value, onChangeText }) {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{title}:</Text>
@@ -9,6 +10,8 @@ function PlayerName({ title }) {
         keyboardType="default"
         style={styles.input}
         placeholder="Enter name to keep score!"
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );
@@ -16,6 +19,7 @@ function PlayerName({ title }) {
 
 export default PlayerName;
 
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

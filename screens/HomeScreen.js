@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
-import Header from "../components/Header";
+import Header from "../components/UI/Header";
 import { Colors } from "../constants/styles";
-import FlagLogo from "../components/FlagLogo";
+import FlagLogo from "../components/UI/FlagLogo";
 
 // function to load home screen content
 function HomeScreen() {

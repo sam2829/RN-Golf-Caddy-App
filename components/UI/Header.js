@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { Colors } from "../constants/styles";
+import { Colors } from "../../constants/styles";
 
 // function to create custom Header
 function Header({ children }) {
