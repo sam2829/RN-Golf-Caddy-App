@@ -1,9 +1,17 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { Colors } from "../constants/styles";
 import Header from "../components/UI/Header";
 import GroupNumbers from "../components/groups/GroupNumbers";
 import { useState } from "react";
 import Button from "../components/UI/Button";
+import EnterPlayerNames from "../components/groups/EnterPlayerNames";
 
 // component to render group screen
 function GroupScreen() {
@@ -16,6 +24,9 @@ function GroupScreen() {
   //   use state hook for player names
   const [playerNames, setPlayerNames] = useState({});
 
+  //   use state hook for confirmed players
+  const [confirmedPlayers, setConfirmedPlayers] = useState({});
+
   //   function for handling number of players
   const handlePlayerNumbers = (value) => {
     const cleanedValue = value.replace(/[^0-9]/g, "");
@@ -25,7 +36,14 @@ function GroupScreen() {
   //   function for handling number of groups
   const handleNumberOfGroups = (value) => {
     const cleanedValue = value.replace(/[^0-9]/g, "");
-    setNumberOfGroups(value ? Number(cleanedValue) : 0);
+    if (cleanedValue > numberOfPlayers) {
+      Alert.alert(
+        "Select suitable number",
+        "Select another number for number of groups which can be used."
+      );
+    } else {
+      setNumberOfGroups(value ? Number(cleanedValue) : 0);
+    }
   };
 
   //   function for handling player names
@@ -41,9 +59,26 @@ function GroupScreen() {
     setNumberOfPlayers("");
     setNumberOfGroups("");
     setPlayerNames({});
+    setConfirmedPlayers({});
   };
 
-  console.log(playerNames);
+  //   function to handle confirmed players and randomise
+  const handleConfirmedPlayers = () => {
+    // make sure all names are filled out before submitting
+    const allNamesValid =
+      Object.keys(playerNames).length === numberOfPlayers &&
+      Object.values(playerNames).every((name) => name.trim() !== "");
+
+    if (!allNamesValid) {
+      Alert.alert(
+        "Missing Names",
+        "Please make sure you fill in all players names."
+      );
+      return;
+    }
+
+    setConfirmedPlayers(playerNames);
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -56,43 +91,30 @@ function GroupScreen() {
         numberOfGroups={numberOfGroups}
         onGroupNumberChange={handleNumberOfGroups}
       />
-      <View style={styles.playerNamesContainer}>
-        {numberOfPlayers > 0 &&
-          numberOfGroups > 0 &&
-          Array.from({ length: numberOfPlayers }, (_, i) => (
-            <View key={i} style={styles.playerBlock}>
-              <Text style={styles.player}>Player {i + 1}:</Text>
-              <TextInput
-                keyboardType="default"
-                style={styles.playerNameInput}
-                placeholder={`Enter player name`}
-                value={playerNames[`player${i + 1}`] || ""}
-                onChangeText={(text) => handleChangePlayerNames(i, text)}
-              />
-            </View>
-          ))
-            .reduce((rows, element, index) => {
-              if (index % 2 === 0) {
-                rows.push([element]);
-              } else {
-                rows[rows.length - 1].push(element);
-              }
-              return rows;
-            }, [])
-            .map((row, i) => (
-              <View key={i} style={styles.row}>
-                {row}
-                {/* Filler to keep layout aligned */}
-                {row.length === 1 && <View style={styles.playerBlock} />}
-              </View>
-            ))}
-      </View>
+      {/* import inputs for player names */}
+      <EnterPlayerNames
+        numberOfPlayers={numberOfPlayers}
+        numberOfGroups={numberOfGroups}
+        playerNames={playerNames}
+        handleChangePlayerNames={handleChangePlayerNames}
+      />
       {/* import and display reset and submit player buttons */}
       <View style={styles.buttonsContainer}>
         <Button onPress={handleResetGroupdata} style={styles.button}>
           Reset
         </Button>
-        <Button style={styles.button}>Randomise</Button>
+        <Button onPress={handleConfirmedPlayers} style={styles.button}>
+          Randomise
+        </Button>
+      </View>
+      {/* list out the player names entered */}
+      <View>
+        {Object.keys(confirmedPlayers).length > 0 &&
+          Object.entries(confirmedPlayers).map(([key, name]) => (
+            <Text key={key} style={styles.confirmedPlayer}>
+              {name}
+            </Text>
+          ))}
       </View>
     </ScrollView>
   );
@@ -106,28 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.colors.lightGrey,
     paddingHorizontal: 10,
-  },
-  playerNamesContainer: {},
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  playerBlock: {
-    flex: 1,
-    marginHorizontal: 10,
-    marginBottom: 15,
-  },
-  player: {
-    fontSize: 14,
-    fontWeight: "500",
-    marginBottom: 8,
-  },
-  playerNameInput: {
-    borderWidth: 2,
-    borderRadius: 8,
-    borderColor: Colors.colors.primaryGold,
-    fontSize: 12,
-    padding: 10,
   },
   buttonsContainer: {
     flexDirection: "row",
