@@ -1,4 +1,13 @@
-import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Colors } from "../constants/styles";
 import Header from "../components/UI/Header";
 import GroupNumbers from "../components/groups/GroupNumbers";
@@ -110,38 +119,46 @@ function GroupScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* import header */}
-      <Header>Decide Your Groups</Header>
-      {/* import player numbers */}
-      <GroupNumbers
-        numberOfPlayers={numberOfPlayers}
-        onPlayerNumberChange={handlePlayerNumbers}
-        numberOfGroups={numberOfGroups}
-        onGroupNumberChange={handleNumberOfGroups}
-      />
-      {/* import inputs for player names */}
-      <EnterPlayerNames
-        numberOfPlayers={numberOfPlayers}
-        numberOfGroups={numberOfGroups}
-        playerNames={playerNames}
-        handleChangePlayerNames={handleChangePlayerNames}
-      />
-      {/* import and display reset and submit player buttons */}
-      <View style={styles.buttonsContainer}>
-        <Button onPress={handleResetGroupdata} style={styles.button}>
-          Reset
-        </Button>
-        <Button onPress={handleRandomisePlayers} style={styles.button}>
-          Randomise
-        </Button>
-      </View>
-      {/* import and display lists of grouped players */}
-      <GroupedPlayers
-        groupedPlayers={groupedPlayers}
-        triggerFlip={flipTrigger}
-      />
-    </ScrollView>
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: "blue" }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView style={styles.container}>
+          {/* import header */}
+          <Header>Decide Your Groups</Header>
+          {/* import player numbers */}
+          <GroupNumbers
+            numberOfPlayers={numberOfPlayers}
+            onPlayerNumberChange={handlePlayerNumbers}
+            numberOfGroups={numberOfGroups}
+            onGroupNumberChange={handleNumberOfGroups}
+          />
+          {/* import inputs for player names */}
+          <EnterPlayerNames
+            numberOfPlayers={numberOfPlayers}
+            numberOfGroups={numberOfGroups}
+            playerNames={playerNames}
+            handleChangePlayerNames={handleChangePlayerNames}
+          />
+          {/* import and display reset and submit player buttons */}
+          <View style={styles.buttonsContainer}>
+            <Button onPress={handleResetGroupdata} style={styles.button}>
+              Reset
+            </Button>
+            <Button onPress={handleRandomisePlayers} style={styles.button}>
+              Randomise
+            </Button>
+          </View>
+          {/* import and display lists of grouped players */}
+          <GroupedPlayers
+            groupedPlayers={groupedPlayers}
+            triggerFlip={flipTrigger}
+          />
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

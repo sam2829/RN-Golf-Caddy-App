@@ -21,6 +21,7 @@ function EnterPlayerNames({
               placeholder={`Enter player name`}
               value={playerNames[`player${i + 1}`] || ""}
               onChangeText={(text) => handleChangePlayerNames(i, text)}
+              maxLength={18}
             />
           </View>
         ))

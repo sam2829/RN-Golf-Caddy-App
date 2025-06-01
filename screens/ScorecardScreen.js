@@ -1,4 +1,13 @@
-import { Alert, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { Colors } from "../constants/styles";
 import ScorecardHeaders from "../components/scorecard/ScorecardHeaders";
 import ScorecardTableCells from "../components/scorecard/ScorecardTableCells";
@@ -63,31 +72,39 @@ function ScorecardScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* import player names */}
-      <ScorecardPlayerNames
-        playerNames={playerNames}
-        onNameChange={handleNameChange}
-      />
-      {/* header Row */}
-      <View style={styles.scorecardContainer}>
-        {/* import scorecard headers */}
-        <ScorecardHeaders />
-        {/* import scorecard table cells */}
-        <ScorecardTableCells
-          playerNames={playerNames}
-          scores={scores}
-          onScoreChange={handleScoreChange}
-        />
-        {/* import total scores */}
-        <ScorecardTotal playerNames={playerNames} scores={scores} />
-      </View>
-      {/* button container */}
-      <View style={styles.buttonContainer}>
-        {/* import button for reset */}
-        <Button onPress={handleConfirmReset}>Reset Scorecard</Button>
-      </View>
-    </ScrollView>
+    <KeyboardAvoidingView
+      style={{ flex: 1, backgroundColor: "blue" }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView style={styles.container}>
+          {/* import player names */}
+          <ScorecardPlayerNames
+            playerNames={playerNames}
+            onNameChange={handleNameChange}
+          />
+          {/* header Row */}
+          <View style={styles.scorecardContainer}>
+            {/* import scorecard headers */}
+            <ScorecardHeaders />
+            {/* import scorecard table cells */}
+            <ScorecardTableCells
+              playerNames={playerNames}
+              scores={scores}
+              onScoreChange={handleScoreChange}
+            />
+            {/* import total scores */}
+            <ScorecardTotal playerNames={playerNames} scores={scores} />
+          </View>
+          {/* button container */}
+          <View style={styles.buttonContainer}>
+            {/* import button for reset */}
+            <Button onPress={handleConfirmReset}>Reset Scorecard</Button>
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

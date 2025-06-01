@@ -12,6 +12,7 @@ function PlayerName({ title, value, onChangeText }) {
         placeholder="Enter name to keep score!"
         value={value}
         onChangeText={onChangeText}
+        maxLength={18}
       />
     </View>
   );
