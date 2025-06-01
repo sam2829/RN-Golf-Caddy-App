@@ -1,17 +1,12 @@
-import {
-  Alert,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Colors } from "../constants/styles";
 import Header from "../components/UI/Header";
 import GroupNumbers from "../components/groups/GroupNumbers";
 import { useState } from "react";
 import Button from "../components/UI/Button";
 import EnterPlayerNames from "../components/groups/EnterPlayerNames";
+import RandomiseAndGroupPlayers from "../components/groups/RandomiseAndGroupPlayers";
+import GroupedPlayers from "../components/groups/GroupedPlayers";
 
 // component to render group screen
 function GroupScreen() {
@@ -24,8 +19,11 @@ function GroupScreen() {
   //   use state hook for player names
   const [playerNames, setPlayerNames] = useState({});
 
-  //   use state hook for confirmed players
-  const [confirmedPlayers, setConfirmedPlayers] = useState({});
+  // use state for grouped players
+  const [groupedPlayers, setGroupedPlayers] = useState([]);
+
+  // state for if groups flipped
+  const [flipTrigger, setFlipTrigger] = useState(0);
 
   //   function for handling number of players
   const handlePlayerNumbers = (value) => {
@@ -36,13 +34,30 @@ function GroupScreen() {
   //   function for handling number of groups
   const handleNumberOfGroups = (value) => {
     const cleanedValue = value.replace(/[^0-9]/g, "");
-    if (cleanedValue > numberOfPlayers) {
+    const groupNumberValid = handleGroupNumberValid(cleanedValue);
+
+    if (!groupNumberValid) {
+      return;
+    } else {
+      setNumberOfGroups(value ? Number(cleanedValue) : "");
+    }
+  };
+
+  // function to check for number of groups validity
+  const handleGroupNumberValid = (groupValue) => {
+    if (
+      (groupValue !== "" && groupValue > numberOfPlayers) ||
+      (groupValue !== "" &&
+        groupValue !== 0 &&
+        numberOfPlayers / groupValue > 4)
+    ) {
       Alert.alert(
         "Select suitable number",
-        "Select another number for number of groups which can be used."
+        "Each group must have no more than 4 players and groups must not exceed total players."
       );
+      return;
     } else {
-      setNumberOfGroups(value ? Number(cleanedValue) : 0);
+      return groupValue;
     }
   };
 
@@ -59,16 +74,25 @@ function GroupScreen() {
     setNumberOfPlayers("");
     setNumberOfGroups("");
     setPlayerNames({});
-    setConfirmedPlayers({});
+    setGroupedPlayers([]);
+    setFlipTrigger(0);
   };
 
   //   function to handle confirmed players and randomise
-  const handleConfirmedPlayers = () => {
+  const handleRandomisePlayers = () => {
     // make sure all names are filled out before submitting
     const allNamesValid =
       Object.keys(playerNames).length === numberOfPlayers &&
       Object.values(playerNames).every((name) => name.trim() !== "");
 
+    // check group number valid
+    const groupNumberValid = handleGroupNumberValid(numberOfGroups);
+
+    if (!groupNumberValid) {
+      return;
+    }
+
+    // check all player names are entered
     if (!allNamesValid) {
       Alert.alert(
         "Missing Names",
@@ -76,8 +100,13 @@ function GroupScreen() {
       );
       return;
     }
-
-    setConfirmedPlayers(playerNames);
+    // randomise groups function
+    const groups = RandomiseAndGroupPlayers(
+      Object.values(playerNames),
+      numberOfGroups
+    );
+    setGroupedPlayers(groups);
+    setFlipTrigger((prev) => prev + 1);
   };
 
   return (
@@ -103,19 +132,15 @@ function GroupScreen() {
         <Button onPress={handleResetGroupdata} style={styles.button}>
           Reset
         </Button>
-        <Button onPress={handleConfirmedPlayers} style={styles.button}>
+        <Button onPress={handleRandomisePlayers} style={styles.button}>
           Randomise
         </Button>
       </View>
-      {/* list out the player names entered */}
-      <View>
-        {Object.keys(confirmedPlayers).length > 0 &&
-          Object.entries(confirmedPlayers).map(([key, name]) => (
-            <Text key={key} style={styles.confirmedPlayer}>
-              {name}
-            </Text>
-          ))}
-      </View>
+      {/* import and display lists of grouped players */}
+      <GroupedPlayers
+        groupedPlayers={groupedPlayers}
+        triggerFlip={flipTrigger}
+      />
     </ScrollView>
   );
 }
