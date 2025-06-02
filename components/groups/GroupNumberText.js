@@ -41,5 +41,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     padding: 10,
     textAlign: "center",
+    color: Colors.colors.black,
   },
 });

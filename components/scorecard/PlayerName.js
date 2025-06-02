@@ -10,6 +10,7 @@ function PlayerName({ title, value, onChangeText }) {
         keyboardType="default"
         style={styles.input}
         placeholder="Enter name to keep score!"
+        placeholderTextColor={Colors.colors.darkGrey}
         value={value}
         onChangeText={onChangeText}
         maxLength={18}
@@ -39,5 +40,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.colors.primaryGold,
     fontSize: 12,
     padding: 10,
+    color: Colors.colors.black,
   },
 });

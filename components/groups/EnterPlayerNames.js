@@ -19,6 +19,7 @@ function EnterPlayerNames({
               keyboardType="default"
               style={styles.playerNameInput}
               placeholder={`Enter player name`}
+              placeholderTextColor={Colors.colors.darkGrey}
               value={playerNames[`player${i + 1}`] || ""}
               onChangeText={(text) => handleChangePlayerNames(i, text)}
               maxLength={18}
@@ -68,5 +69,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.colors.primaryGold,
     fontSize: 12,
     padding: 10,
+    color: Colors.colors.black,
   },
 });

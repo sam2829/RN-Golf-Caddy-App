@@ -39,7 +39,13 @@ function ScorecardTableCells({ playerNames, scores, onScoreChange }) {
                   onChangeText={(value) => {
                     // Only allow whole numbers
                     const cleanedValue = value.replace(/[^0-9]/g, "");
-                    onScoreChange(playerKey, item.holeNumber, cleanedValue);
+                    // Enforce minimum of 1
+                    const numericValue = parseInt(cleanedValue, 10);
+                    const finalValue =
+                      !isNaN(numericValue) && numericValue >= 1
+                        ? String(numericValue)
+                        : "";
+                    onScoreChange(playerKey, item.holeNumber, finalValue);
                   }}
                   editable={isPlayerSet}
                   maxLength={2}
@@ -85,6 +91,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     fontWeight: "500",
+    color: Colors.colors.black,
   },
   disabledInput: {
     borderBottomWidth: 0,
