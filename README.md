@@ -6,7 +6,7 @@ This is a React Native app designed for my local Golf Club. It provides players 
 
 Here is the link to download the app for android [Link](https://expo.dev/accounts/samscarisbrick/projects/RN-golf-caddy/builds/f05f7854-fa83-4bcc-9ad0-1488314736ac)
 
-![Download Barcode](/docs.readme-images/barcode.png)
+![Download Barcode](/docs/readme-images/barcode.png)
 
 ![Homescreen Screenshot](/docs/readme-images/home-screenshot.png)
 
@@ -28,6 +28,20 @@ Here is the link to download the app for android [Link](https://expo.dev/account
       - [Features](#features)
     - [The Surface Plane](#the-surface-plane)
       - [Design](#design)
+    - [Use Of Components](#use-of-components)
+    - [Technologies Used](#technologies-used)
+      - [Languages Used](#languages-used)
+    - [Frameworks, Libraries and Dependencies](#frameworks-libraries-and-dependencies)
+      - [React Native](#react-native)
+      - [React Navigation Bottom Tabs](#react-navigation-bottom-tabs)
+      - [React Navigation Native Stack](#react-navigation-native-stack)
+      - [React Native Screens](#react-native-screens)
+      - [React](#react)
+      - [Expo](#expo)
+      - [Font Awesome](#fontawesome)
+      - [Prettier](#prettier)
+    - [Testing](#testing)
+  - [Credits](#credits)
 
 ## Planning
 
@@ -163,3 +177,129 @@ The colour palette was created using the coolors website.
 Font awesome was used to for the sites icons.
 
 [back to top](#golf-caddy-app)
+
+### Use Of Components
+
+**_AnimateGroups.js_**
+
+Used to bring animation to show the user which players are in which groups.
+
+**_EnterPlayerNames.js_**
+
+Used to display a list of text inputs for the users to enter their names to enter into the group shuffler. The number of text inputs displayed, depends on the number players entered by user.
+
+**_GroupedPlayers.js_**
+
+Used to display the and style the group container for the groups being displayed.
+
+**_GroupNumbers.js_**
+
+Used as the text inputs for the user to slect how many players and groups there will be.
+
+**_RandomiseAndGroupPlayer.js_**
+
+Used as the logic which randomises the groups and players.
+
+**_HoleItem.js_**
+
+Used to display the each hole item on the holes screen.
+
+**_PlayerName.js_**
+
+Used as the text input for the user to enter the player names on the scorecard screen.
+
+**_ScorecardHeader.js_**
+
+Used to display the headers across the top of the scorecard.
+
+**_ScorecardPlayerNames.js_**
+
+Used to display and layout the player name inputs on the scorecard screen.
+
+**_ScorecardTableCells.js_**
+
+Used for displaying the the inputs on the scorecard for the user to enter their scores.
+
+**_ScorecardTotal.js_**
+
+Used to display the total scores of the players on the scorecard.
+
+**_Button.js_**
+
+Used to display and style custom buttons.
+
+**_FlagLogo.js_**
+
+Used to create, display and style a flag logo.
+
+**_Header.js_**
+
+Used to display the headers on different screens. 
+
+[back to top](#golf-caddy-app)
+
+### Technnologies Used
+
+#### Languages Used
+
+- React Native
+
+- JSX
+
+- CSS
+
+- JavaScript
+
+### Frameworks, Libraries and Dependencies
+
+#### React Native
+
+React Native is the framework used to build the app, allowing me to create a fully functional mobile app using JavaScript and React.
+
+#### React Navigation Bottom Tabs
+
+This library provides a tab-based navigation bar at the bottom of the screen, allowing users to easily switch between main sections of the app.
+
+#### React NAvigation Native Stack
+
+Used to manage screen transitions using a stack-based navigation system, similar to how pages stack in a typical mobile app.
+
+#### React Native Screens
+
+mproves performance by optimizing screen rendering and memory usage in navigation-heavy apps.
+
+#### Expo
+
+Expo simplifies the development process by providing tools and services to build, test, and deploy React Native apps more easily.
+
+#### Fone Awesome
+
+Google fonts was used to provide the font for the site.
+
+#### Prettier
+
+Prettier is used as code formatting tool which helped me structure my code in the correct way.
+
+[back to top](#golf-caddy-app)
+
+### Testing
+
+I have included details of my testing during and post development in a separate file called [TESTING.md](TESTING.md)
+
+## Credits
+
+- React Native Framework - For being able to use React Native Framework to build my project and all the documentation to help build and set up correctly.
+
+- React Framework - For being able to use React Framework to build my project and all the documentation to help build and set up correctly.
+
+- Expo - For providing me the platform for the development process and helping with the build of the app.
+
+- Font Awesome - For Providing the icons used throughout this project.
+
+- Google - For providing images for the golf course.
+
+[back to top](#golf-caddy-app)
+
+
+
+
