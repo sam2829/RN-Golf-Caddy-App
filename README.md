@@ -74,13 +74,13 @@ It was carried out this way to try ensuring that all core requirements were comp
 
 The kanban board was created using GitHub projects, this helped me be able to see all my user stories and be able to keep track of which ones had been done, to do or in progress.
 
-LINK FOR KANBAN USER STORIES HERE!!!!!!
+![User Stories Screenshot](/docs/readme-images/user-stories-screenshot.png)
 
 Each User story was placed into it's own milestone iteration to help schedule the development of the project. These iterations can be set with dates but I did not do this due to fitting in around work and other commitments. In the iteration you can close a user story when finished, this will also keep track of how much is completed.
 
 Milestones: 
 
-MILESTONE SCREENSHOT HERE!!!!
+![Milestones Screenshot](/docs/readme-images/milestone-screenshot.png)
 
 [back to top](#golf-caddy-app)
 
@@ -88,7 +88,41 @@ MILESTONE SCREENSHOT HERE!!!!
 
 The following user stories were completed throughout the development:
 
-LIST ALL USER STORIES HERE!!!!
+HomeScreen:
+
+As a user I can view the home screen when I load the app so that I get a welcome message and brief description about the app.
+
+Bottom Tab Navigation:
+
+As a user I can view all the screen links in the bottom tab so that I can easily navigate through the app.
+
+Hole Details Screen in Stack Navigation:
+
+As a user I can click on a certain hole on the holes screen which opens up the hole details page in stack navigation so that it keeps it simple to navigate and also get a back button to go back to the holes screen.
+
+Holes Screen:
+
+As a user I can view the holes screen so that I can view all the different holes small info, and if clicked can go to that particular hole information.
+
+Hole Details Screen:
+
+As a user I can view the hole details screen so that I can view a particular holes data and advice on how to play that hole.
+
+Scorecard Screen:
+
+As a user I can view the scorecard screen so that I can input and track mine and the other players scores.
+
+Groups Screen:
+
+As a user I can view the groups screen so that I can input the number players, number of groups, players names and can shuffle the players to them into random groups to work out who's playing with who.
+
+Reset Group Informaton:
+
+As a user I can click the reset button in the groups screen so that I can quickly reset the group shuffle information, ready to fill information in again.
+
+Reset Scorecard:
+
+As a user I can click the reset button on the scorecard screen so that I can quickly reset the players names and scorecard scores, ready to play again.
 
 [back to top](#golf-caddy-app)
 
