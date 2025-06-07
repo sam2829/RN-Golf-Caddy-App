@@ -6,7 +6,7 @@ This is a React Native app designed for my local Golf Club. It provides players 
 
 Here is the link to download the app for android [Link](https://expo.dev/accounts/samscarisbrick/projects/RN-golf-caddy/builds/f05f7854-fa83-4bcc-9ad0-1488314736ac)
 
-![Download Barcode](/docs/readme-images/barcode.png)
+![Download QR Code](/docs/readme-images/QRCode.png)
 
 ![Homescreen Screenshot](/docs/readme-images/home-screenshot.png)
 
