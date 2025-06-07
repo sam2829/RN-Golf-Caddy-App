@@ -4,7 +4,7 @@
 
 This is a React Native app designed for my local Golf Club. It provides players with helpful advice and information on how to play each hole on the course. In addition to course guidance, users can input and track their scores during a round and use the group organiser to randomly shuffle players into groups for the round. Whether you're a local member or a visiting player, this app is a convenient digital companion to enhance your round.
 
-Here is the link to download the app for android [Link](https://expo.dev/accounts/samscarisbrick/projects/RN-golf-caddy/builds/f05f7854-fa83-4bcc-9ad0-1488314736ac)
+Here is the link to download the app for android [Link](https://expo.dev/accounts/samscarisbrick/projects/RN-golf-caddy/builds/f7661a5d-1ad7-4e05-bfb9-df3ef32997d2)
 
 ![Download QR Code](/docs/readme-images/QRCode.png)
 
