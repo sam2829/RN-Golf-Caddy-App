@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "500",
     textAlign: "center",
+    flexShrink: 1,
   },
   input: {
     width: 40,

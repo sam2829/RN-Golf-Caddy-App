@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import Header from "../components/UI/Header";
 import { Colors } from "../constants/styles";
 import FlagLogo from "../components/UI/FlagLogo";
@@ -6,7 +6,7 @@ import FlagLogo from "../components/UI/FlagLogo";
 // function to load home screen content
 function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* import header */}
       <Header>Welcome to the Abergavenny Golf Caddy!</Header>
       <View style={styles.textContainer}>
@@ -24,7 +24,7 @@ function HomeScreen() {
       <View style={styles.logoContainer}>
         <FlagLogo />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
